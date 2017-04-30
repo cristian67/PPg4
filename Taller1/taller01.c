@@ -10,7 +10,7 @@ void imprimirHorario(char archivo[],int horario[][6]){
 	fprintf(fp, "Lunes;Martes;Miercoles;Jueves;Viernes;Sabado\n");
 	for (i=0; i<8; i++){
 		for (j=0;j<6;j++){
-		  //`if ((i==6 && j==5)||(i==7&&j==5))continue;
+			//`if ((i==6 && j==5)||(i==7&&j==5))continue;
 			if( horario[i][j] == 1) {
 				fprintf(fp, "Algoritmos y Programacion");
 			}
@@ -118,7 +118,6 @@ int main(){
 
 	for (i=0;i<8;i++) for(j=0;j<6;j++) horario[i][j]=0;
 
-	
 	// Llenado SH
 	for (i = 0; i<6; i++) profes[0][i] = 1;
 		
@@ -128,79 +127,62 @@ int main(){
 	profes[1][4] = 1;
 
 	// Lennado CAD
-	
 	profes[2][0] = 1;
 	profes[2][1] = 1;
 	profes[2][2] = 1;
-
-
 	profes[3][1] = 1;
 	profes[3][3] = 1;
 	profes[3][5] = 1;
-
 
 	for (i = 0; i<6; i++) profes[4][i] = 1;
 
 	for ( i= 0; i<5; i++){
 	 for(j=0; j<6; j++){
 		if( profes[i][j] == 1) dias[j]++;
-		/*if( profes[i][j] == 1) dias[1]++;
-		if( profes[i][j] == 2) dias[2]++;
-		if( profes[i][j] == 3) dias[3]++;
-		if( profes[i][j] == 4) dias[4]++;
-		if( profes[i][j] == 5) dias[5]++;*/
-	  }
-
+		}
   }
-  /*minimo = (dias[0],dias[1]);
-  minimo = (minimo,dias[2]);
-  minimo = (minimo,dias[3]);
-	minimo = (minimo,dias[4]);
-	minimo = (minimo,dias[5]);
-	printf("%d\n",minimo);*/
 
 	while( hProfes[0] != 99 ){  
-	  // Busqueda de menor disponibilidad
+		// Busqueda de menor disponibilidad
 		//printf("horas Profes;%d,%d,%d,%d,%d\n",hProfes[0],hProfes[1],hProfes[2],hProfes[3],hProfes[4]);
-	  
+		
 		if (hProfes[0] < minimoHora) {
-		  minimoHora = hProfes[0];
-		  index = 0;
+			minimoHora = hProfes[0];
+			index = 0;
 		}
 		if (hProfes[1] < minimoHora) {
-		  minimoHora = hProfes[1];
-		  index = 1;
-	  }
+			minimoHora = hProfes[1];
+			index = 1;
+		}
 		if (hProfes[2] < minimoHora) {
-		  minimoHora = hProfes[2];
-		  index = 2;
-	  }
+			minimoHora = hProfes[2];
+			index = 2;
+		}
 		if (hProfes[3] < minimoHora) {
-		  minimoHora = hProfes[3];
-		  index = 3;
-	  }
-	  if (hProfes[4] < minimoHora) {
-		  minimoHora = hProfes[4];
-		  index = 4;
-	  }
+			minimoHora = hProfes[3];
+			index = 3;
+		}
+		if (hProfes[4] < minimoHora) {
+			minimoHora = hProfes[4];
+			index = 4;
+		}
 		// Condicionales con el horario disponible por dia
-	  for (i =0; i< 6; i++){
-		  if (profes[index][i] ==1 && horas[i]!=0){
-			  if ( aux2 > dias[i]){	
-				  aux2 = dias[i];
-				  aux = i;
+		for (i =0; i< 6; i++){
+			if (profes[index][i] ==1 && horas[i]!=0){
+				if ( aux2 > dias[i]){	
+					aux2 = dias[i];
+					aux = i;
 				}	
-		  } 			
-	  }
+			}				
+		}
 			
 		//printf("%d,%d,%d,%d,%d,%d\n",dias[0],dias[1],dias[2],dias[3],dias[4],dias[5]);
 		//printf("index%d,aux2%d,aux%d,horas%d\n",index,aux2,aux,horas[aux]);
 
-	
 		// Descontar del horario y horario profe
 		if( horas[aux] - 3 < 0){
-		  if ( horas[aux] - 2 < 0){
-		  
+			if ( horas[aux] - 2 < 0){
+			
 				horas[aux] = horas[aux]-2;
 				hProfes[index]--;
 				for (i=0;i<4;i++){
@@ -208,14 +190,10 @@ int main(){
 								asignarHora(rProfe[index][i][0],horario,aux);
 								rProfe[index][i][0] =0;
 								rProfe[index][i][1] -= 1;	
-						    break;
+								break;
 						}
-				
-
 				}	
-
-
-		  }else{
+			}else{
 				horas[aux] = horas[aux]-2;
 				hProfes[index]--;
 				for (i=0;i<4;i++){
@@ -224,45 +202,37 @@ int main(){
 								asignarHora(rProfe[index][i][0],horario,aux);
 								rProfe[index][i][0] =0;
 								rProfe[index][i][1] -= 2;	
-						    break;
+								break;
 						}
 				}
 				if (rProfe[index][i][1] >0){
 						for (i =0; i<6; i++){
 								if (profes[index][i] == 1 && horas[i] >0){
-												asignarHora(rProfe[index][i][0],horario,i);
-												rProfe[index][i][1] -= 1;
-												break;
-										
+									asignarHora(rProfe[index][i][0],horario,i);
+									rProfe[index][i][1] -= 1;
+								  break;
 								}
 						}								
-			
 				}	
-
-					
-
-		  }
-
+			}
 		}else{
-		  horas[aux] = horas[aux]- 3;	
-		  hProfes[index]--;
-		  for(i=0; i<4; i++){
+			horas[aux] = horas[aux]- 3;	
+			hProfes[index]--;
+			for(i=0; i<4; i++){
 				if ( rProfe[index][i][0] > 0 ){
-				  asignarHora(rProfe[index][i][0],horario,aux);
-				  asignarHora(rProfe[index][i][0],horario,aux);
-				  asignarHora(rProfe[index][i][0],horario,aux);
-				  rProfe[index][i][0] = 0;
-			   	break;
-			  }
-		  }
+					asignarHora(rProfe[index][i][0],horario,aux);
+					asignarHora(rProfe[index][i][0],horario,aux);
+					asignarHora(rProfe[index][i][0],horario,aux);
+					rProfe[index][i][0] = 0;
+					break;
+				}
+			}
 		}
 		for (i=0;i<5;i++){
-		  if (hProfes[i] == 0) hProfes[i] =99;
-		  		
+			if (hProfes[i] == 0) hProfes[i] =99;
 		}
-
-	  minimo = 10;
-	  aux2 = 10;
+		minimo = 10;
+		aux2 = 10;
 		minimoHora=10;
 		/*for(i=0;i<8;i++) {
        for(j=0;j<6;j++) {
@@ -270,18 +240,16 @@ int main(){
        }
        printf("\n");
      }
-	*/
+	  */
 
-			//f(r(i=0;i<6;i++) dias[i]=0;
-	  }	
+		//f(r(i=0;i<6;i++) dias[i]=0;
+		}	
     /*for(i=0;i<8;i++) {
-		  for(j=0;j<6;j++) { 
-		    printf("%d,",horario[i][j]);
-	    }
-		  printf("\n");
+			for(j=0;j<6;j++) { 
+				printf("%d,",horario[i][j]);
+			}
+			printf("\n");
     }*/
-  //imprimirHorario((char*)"horario.csv",horario);
 		imprimirHorario((char*)"horario.csv",horario);
 return 0;
-
 }
